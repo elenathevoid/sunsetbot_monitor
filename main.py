@@ -5,7 +5,7 @@
 
 使用方式:
   python main.py morning    # 早晨推送: 今日日落 + 明日日出 + 明日日落
-  python main.py afternoon  # 下午复查: 仅当今日日落达到小烧及以上时推送
+  python main.py afternoon  # 下午Recheck: 仅当今日日落达到小烧及以上时推送
 """
 
 import os
@@ -298,7 +298,6 @@ def run_morning():
     if is_small_burn_or_above(today_level):
         title = f"今日日落{today_level}{get_emoji_for_level(today_level)} | {title}"
 
-
     print(f"[INFO] 今日日落等级: {today_level}")
     print(f"[INFO] 小烧及以上: {is_small_burn_or_above(today_level)}")
     print(f"[INFO] 消息标题: {title}")
@@ -312,17 +311,17 @@ def run_morning():
         sys.exit(1)
 
 
-# ============== 下午复查 ==============
+# ============== 下午Recheck ==============
 def run_afternoon():
     """
-    下午复查逻辑:
+    下午Recheck逻辑:
     重新获取今日日落预报, 仅当达到小烧及以上时推送
     """
     now = now_cst()
     date_str = now.strftime("%Y年%m月%d日")
-    print(f"[INFO] 下午复查启动 - {date_str} {now.strftime('%H:%M:%S')} CST")
+    print(f"[INFO] 下午Recheck启动 - {date_str} {now.strftime('%H:%M:%S')} CST")
 
-    print("[INFO] 正在复查今日日落...")
+    print("[INFO] 正在Recheck今日日落...")
     today_sunset = fetch_forecast(CITY, "set_1")
 
     if today_sunset is None:
@@ -333,7 +332,7 @@ def run_afternoon():
     value, level = parse_quality(quality)
     emoji = get_emoji_for_level(level)
 
-    print(f"[INFO] 今日日落复查结果: {quality} (等级: {level})")
+    print(f"[INFO] 今日日落Recheck结果: {quality} (等级: {level})")
 
     if not is_small_burn_or_above(level):
         print(f"[INFO] 今日日落等级为「{level}」, 未达到小烧及以上, 不推送")
@@ -343,10 +342,10 @@ def run_afternoon():
 
     # 组装消息
     lines = []
-    lines.append(f"<h2>🔥 火烧云下午复查 | {date_str}</h2>")
+    lines.append(f"<h2>🔥 火烧云下午Recheck | {date_str}</h2>")
     lines.append(f"<p>📍 城市: {CITY} | 📊 模型: {MODEL}</p>")
     lines.append("<hr>")
-    lines.append(f"<h3>{emoji} 今日日落（复查）</h3>")
+    lines.append(f"<h3>{emoji} 今日日落（Recheck）</h3>")
     lines.append("<ul>")
     lines.append(f"<li>📍 {today_sunset.get('display_city_name', '')} {today_sunset.get('display_event_name_cn', '')}</li>")
     lines.append(f"<li>🕐 {today_sunset.get('tb_event_time', '未知')}</li>")
@@ -355,16 +354,16 @@ def run_afternoon():
     lines.append(f"<li>📊 {today_sunset.get('display_model', '')} | {today_sunset.get('display_times_name', '')}({today_sunset.get('display_times_str', '')})</li>")
     lines.append("</ul>")
     lines.append("<hr>")
-    lines.append(f"<p style='color:gray;font-size:12px;'>数据来源: sunsetbot.top | 复查时间: {now.strftime('%Y-%m-%d %H:%M:%S')} CST</p>")
+    lines.append(f"<p style='color:gray;font-size:12px;'>数据来源: sunsetbot.top | Recheck时间: {now.strftime('%Y-%m-%d %H:%M:%S')} CST</p>")
 
     content = "\n".join(lines)
-        title = f"今日日落{level}{emoji} | 🔥 火烧云Recheck {date_str}"
+    title = f"今日日落{level}{emoji} | 🔥 火烧云Recheck {date_str}"
 
     success = send_pushplus(title, content)
     if success:
-        print("[INFO] 下午复查推送完成")
+        print("[INFO] 下午Recheck推送完成")
     else:
-        print("[ERROR] 下午复查推送失败")
+        print("[ERROR] 下午Recheck推送失败")
         sys.exit(1)
 
 
