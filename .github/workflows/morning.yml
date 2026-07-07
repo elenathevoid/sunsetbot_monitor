@@ -27,6 +27,7 @@ jobs:
       - name: 执行早晨推送
         env:
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
-          SB_CITY: ${{ vars.SB_CITY }}
-          SB_MODEL: ${{ vars.SB_MODEL }}
+          SB_CITY: ${{ vars.SB_CITY || '上海' }}
+          SB_MODEL: ${{ vars.SB_MODEL || 'EC' }}
+
         run: python main.py morning
