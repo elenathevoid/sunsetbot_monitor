@@ -232,129 +232,60 @@ def run_morning():
 
     # 组装消息
     lines = []
-    lines.append(f"
-🌅 火烧云日报 | {date_str}
-")
-    lines.append(f"
-
-📍 城市: {CITY} | 📊 模型: {MODEL}
-
-")
-    lines.append("
-")
+    lines.append(f"<h2>🌅 火烧云日报 | {date_str}</h2>")
+    lines.append(f"<p>📍 城市: {CITY} | 📊 模型: {MODEL}</p>")
+    lines.append("<hr>")
 
     # 今日日落
     if today_sunset:
         quality = today_sunset.get("tb_quality", "")
         _, level = parse_quality(quality)
         emoji = get_emoji_for_level(level)
-        lines.append(f"
-{emoji} 今日日落
-")
-        lines.append("
-")
-        lines.append(f"
-📍 {today_sunset.get('display_city_name', '')} {today_sunset.get('display_event_name_cn', '')}
-")
-        lines.append(f"
-🕐 {today_sunset.get('tb_event_time', '未知')}
-")
-        lines.append(f"
-🔥 鲜艳度: {quality}
-")
-        lines.append(f"
-🌫️ 气溶胶: {today_sunset.get('tb_aod', '未知')}
-")
-        lines.append(f"
-📊 {today_sunset.get('display_model', '')} | {today_sunset.get('display_times_name', '')}({today_sunset.get('display_times_str', '')})
-")
-        lines.append("
-")
+        lines.append(f"<h3>{emoji} 今日日落</h3>")
+        lines.append("<ul>")
+        lines.append(f"<li>📍 {today_sunset.get('display_city_name', '')} {today_sunset.get('display_event_name_cn', '')}</li>")
+        lines.append(f"<li>🕐 {today_sunset.get('tb_event_time', '未知')}</li>")
+        lines.append(f"<li>🔥 鲜艳度: <b>{quality}</b></li>")
+        lines.append(f"<li>🌫️ 气溶胶: {today_sunset.get('tb_aod', '未知')}</li>")
+        lines.append(f"<li>📊 {today_sunset.get('display_model', '')} | {today_sunset.get('display_times_name', '')}({today_sunset.get('display_times_str', '')})</li>")
+        lines.append("</ul>")
     else:
-        lines.append("
-☁️ 今日日落
-
-⚠️ 数据获取失败
-
-")
+        lines.append("<h3>☁️ 今日日落</h3><p>⚠️ 数据获取失败</p>")
 
     # 明日日出
     if tomorrow_sunrise:
         quality = tomorrow_sunrise.get("tb_quality", "")
         _, level = parse_quality(quality)
         emoji = get_emoji_for_level(level)
-        lines.append(f"
-{emoji} 明日日出
-")
-        lines.append("
-")
-        lines.append(f"
-📍 {tomorrow_sunrise.get('display_city_name', '')} {tomorrow_sunrise.get('display_event_name_cn', '')}
-")
-        lines.append(f"
-🕐 {tomorrow_sunrise.get('tb_event_time', '未知')}
-")
-        lines.append(f"
-🔥 鲜艳度: {quality}
-")
-        lines.append(f"
-🌫️ 气溶胶: {tomorrow_sunrise.get('tb_aod', '未知')}
-")
-        lines.append(f"
-📊 {tomorrow_sunrise.get('display_model', '')} | {tomorrow_sunrise.get('display_times_name', '')}({tomorrow_sunrise.get('display_times_str', '')})
-")
-        lines.append("
-")
+        lines.append(f"<h3>{emoji} 明日日出</h3>")
+        lines.append("<ul>")
+        lines.append(f"<li>📍 {tomorrow_sunrise.get('display_city_name', '')} {tomorrow_sunrise.get('display_event_name_cn', '')}</li>")
+        lines.append(f"<li>🕐 {tomorrow_sunrise.get('tb_event_time', '未知')}</li>")
+        lines.append(f"<li>🔥 鲜艳度: <b>{quality}</b></li>")
+        lines.append(f"<li>🌫️ 气溶胶: {tomorrow_sunrise.get('tb_aod', '未知')}</li>")
+        lines.append(f"<li>📊 {tomorrow_sunrise.get('display_model', '')} | {tomorrow_sunrise.get('display_times_name', '')}({tomorrow_sunrise.get('display_times_str', '')})</li>")
+        lines.append("</ul>")
     else:
-        lines.append("
-☁️ 明日日出
-
-⚠️ 数据获取失败
-
-")
+        lines.append("<h3>☁️ 明日日出</h3><p>⚠️ 数据获取失败</p>")
 
     # 明日日落
     if tomorrow_sunset:
         quality = tomorrow_sunset.get("tb_quality", "")
         _, level = parse_quality(quality)
         emoji = get_emoji_for_level(level)
-        lines.append(f"
-{emoji} 明日日落
-")
-        lines.append("
-")
-        lines.append(f"
-📍 {tomorrow_sunset.get('display_city_name', '')} {tomorrow_sunset.get('display_event_name_cn', '')}
-")
-        lines.append(f"
-🕐 {tomorrow_sunset.get('tb_event_time', '未知')}
-")
-        lines.append(f"
-🔥 鲜艳度: {quality}
-")
-        lines.append(f"
-🌫️ 气溶胶: {tomorrow_sunset.get('tb_aod', '未知')}
-")
-        lines.append(f"
-📊 {tomorrow_sunset.get('display_model', '')} | {tomorrow_sunset.get('display_times_name', '')}({tomorrow_sunset.get('display_times_str', '')})
-")
-        lines.append("
-")
+        lines.append(f"<h3>{emoji} 明日日落</h3>")
+        lines.append("<ul>")
+        lines.append(f"<li>📍 {tomorrow_sunset.get('display_city_name', '')} {tomorrow_sunset.get('display_event_name_cn', '')}</li>")
+        lines.append(f"<li>🕐 {tomorrow_sunset.get('tb_event_time', '未知')}</li>")
+        lines.append(f"<li>🔥 鲜艳度: <b>{quality}</b></li>")
+        lines.append(f"<li>🌫️ 气溶胶: {tomorrow_sunset.get('tb_aod', '未知')}</li>")
+        lines.append(f"<li>📊 {tomorrow_sunset.get('display_model', '')} | {tomorrow_sunset.get('display_times_name', '')}({tomorrow_sunset.get('display_times_str', '')})</li>")
+        lines.append("</ul>")
     else:
-        lines.append("
-☁️ 明日日落
+        lines.append("<h3>☁️ 明日日落</h3><p>⚠️ 数据获取失败</p>")
 
-⚠️ 数据获取失败
-
-")
-
-    lines.append("
-")
-    lines.append(f"
-
-数据来源: sunsetbot.top | 推送时间: {now.strftime('%Y-%m-%d %H:%M:%S')} CST
-
-")
+    lines.append("<hr>")
+    lines.append(f"<p style='color:gray;font-size:12px;'>数据来源: sunsetbot.top | 推送时间: {now.strftime('%Y-%m-%d %H:%M:%S')} CST</p>")
 
     content = "\n".join(lines)
 
@@ -411,45 +342,19 @@ def run_afternoon():
 
     # 组装消息
     lines = []
-    lines.append(f"
-🔥 火烧云下午复查 | {date_str}
-")
-    lines.append(f"
-
-📍 城市: {CITY} | 📊 模型: {MODEL}
-
-")
-    lines.append("
-")
-    lines.append(f"
-{emoji} 今日日落（复查）
-")
-    lines.append("
-")
-    lines.append(f"
-📍 {today_sunset.get('display_city_name', '')} {today_sunset.get('display_event_name_cn', '')}
-")
-    lines.append(f"
-🕐 {today_sunset.get('tb_event_time', '未知')}
-")
-    lines.append(f"
-🔥 鲜艳度: {quality}
-")
-    lines.append(f"
-🌫️ 气溶胶: {today_sunset.get('tb_aod', '未知')}
-")
-    lines.append(f"
-📊 {today_sunset.get('display_model', '')} | {today_sunset.get('display_times_name', '')}({today_sunset.get('display_times_str', '')})
-")
-    lines.append("
-")
-    lines.append("
-")
-    lines.append(f"
-
-数据来源: sunsetbot.top | 复查时间: {now.strftime('%Y-%m-%d %H:%M:%S')} CST
-
-")
+    lines.append(f"<h2>🔥 火烧云下午复查 | {date_str}</h2>")
+    lines.append(f"<p>📍 城市: {CITY} | 📊 模型: {MODEL}</p>")
+    lines.append("<hr>")
+    lines.append(f"<h3>{emoji} 今日日落（复查）</h3>")
+    lines.append("<ul>")
+    lines.append(f"<li>📍 {today_sunset.get('display_city_name', '')} {today_sunset.get('display_event_name_cn', '')}</li>")
+    lines.append(f"<li>🕐 {today_sunset.get('tb_event_time', '未知')}</li>")
+    lines.append(f"<li>🔥 鲜艳度: <b style='color:red;font-size:18px;'>{quality}</b></li>")
+    lines.append(f"<li>🌫️ 气溶胶: {today_sunset.get('tb_aod', '未知')}</li>")
+    lines.append(f"<li>📊 {today_sunset.get('display_model', '')} | {today_sunset.get('display_times_name', '')}({today_sunset.get('display_times_str', '')})</li>")
+    lines.append("</ul>")
+    lines.append("<hr>")
+    lines.append(f"<p style='color:gray;font-size:12px;'>数据来源: sunsetbot.top | 复查时间: {now.strftime('%Y-%m-%d %H:%M:%S')} CST</p>")
 
     content = "\n".join(lines)
     title = f"🔥 火烧云复查 {date_str} | 今日日落{level}{emoji}"
