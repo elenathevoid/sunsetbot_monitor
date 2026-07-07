@@ -296,7 +296,8 @@ def run_morning():
 
     title = f"🌅 火烧云日报 {date_str}"
     if is_small_burn_or_above(today_level):
-        title += f" | 今日日落{today_level}{get_emoji_for_level(today_level)}"
+        title = f"今日日落{today_level}{get_emoji_for_level(today_level)} | {title}"
+
 
     print(f"[INFO] 今日日落等级: {today_level}")
     print(f"[INFO] 小烧及以上: {is_small_burn_or_above(today_level)}")
@@ -357,7 +358,7 @@ def run_afternoon():
     lines.append(f"<p style='color:gray;font-size:12px;'>数据来源: sunsetbot.top | 复查时间: {now.strftime('%Y-%m-%d %H:%M:%S')} CST</p>")
 
     content = "\n".join(lines)
-    title = f"🔥 火烧云复查 {date_str} | 今日日落{level}{emoji}"
+        title = f"今日日落{level}{emoji} | 🔥 火烧云Recheck {date_str}"
 
     success = send_pushplus(title, content)
     if success:
