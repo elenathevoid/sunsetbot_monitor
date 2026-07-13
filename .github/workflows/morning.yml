@@ -1,10 +1,11 @@
-name: Rosy Clouds Morning Report
+name: Daily Sunset Glow Morning Report
 
 on:
   schedule:
-    # 每天北京时间 08:05 (UTC 00:05) 执行
-    - cron: '5 0 * * *'
-  workflow_dispatch:  # 支持手动触发
+    # 每天北京时间 08:17 (UTC 00:17) 执行
+    # 避开整点和UTC午夜高峰, 减少被GitHub跳过的概率
+    - cron: '17 0 * * *'
+  workflow_dispatch:  # 支持手动触发, 方便测试
 
 jobs:
   morning-forecast:
@@ -29,5 +30,4 @@ jobs:
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
           SB_CITY: ${{ vars.SB_CITY || '上海' }}
           SB_MODEL: ${{ vars.SB_MODEL || 'EC' }}
-
         run: python main.py morning
