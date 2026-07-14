@@ -19,3 +19,4 @@ Secrets:
 Variables (可选):
 - SB_CITY: 上海 (默认上海)
 - SB_MODEL: EC (默认 EC)
+
